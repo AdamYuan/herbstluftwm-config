@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-TZ='Asia/Shanghai'; export TZ
-
 # this is a simple config for herbstluftwm
 hc() {
     herbstclient "$@"
