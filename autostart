@@ -5,12 +5,12 @@ hc() {
 }
 export DZEN_HEIGHT=20
 export DZEN_BGCOLOR='#101010'
-export BORDER_WIDTH=2
-export FRAME_GAP=6
+export BORDER_WIDTH=1
+export FRAME_GAP=3
 export COLOR_THEME='#00bbff'
 export COLOR_THEME_NORMAL='#000000'
-export TERMINAL='xterm'
-export TERMINAL_RUN=$TERMINAL' -e'
+export TERMINAL='xfce4-terminal'
+export TERMINAL_RUN=$TERMINAL' -x'
 export WEB=google-chrome-unstable
 export FILE=thunar
 
@@ -125,7 +125,8 @@ hc keybind XF86MyComputer spawn $FILE
 hc keybind XF86Calculator spawn galculator
 hc keybind XF86HomePage spawn $WEB
 
-hc keybind $Mod-v spawn $TERMINAL_RUN "vim"
+hc keybind $Mod-v spawn gvim
+hc keybind $Mod-s spawn "emacs"
 hc keybind $Mod-t spawn $FILE
 hc keybind $Mod-w spawn $WEB
 
@@ -192,19 +193,12 @@ herbstclient set tree_style '╾│ ├└╼─┐'
 # hc detect_monitors
 
 # find the panel
-pkill dzen
 panel=~/.config/herbstluftwm/panel.sh
 [ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel.sh
 for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     # start it on each monitor
     "$panel" $monitor &
 done
-pkill compton
-compton --backend glx --vsync opengl-swc  &
 feh --bg-center /usr/share/backgrounds/archlinux.png &
-pkill trayer &
-#pkill tint2 &
-sleep 0.2
-#tint2
-trayer --edge top --align right --widthtype request --height $DZEN_HEIGHT --transparent true --alpha 1 --tint 0x`echo $DZEN_BGCOLOR|tail -c 7` --margin 100 &
 /bin/bash ~/.config/herbstluftwm/startup.sh &
+exit
