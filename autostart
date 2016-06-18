@@ -210,5 +210,5 @@ while [ -z "$run" ]; do
 	echo "$run"
 done
 #sleep 0.5
-trayer --edge top --align right --widthtype request --height $DZEN_HEIGHT --transparent true --alpha 1 --tint 0x`echo $DZEN_BGCOLOR|tail -c 7` --margin 370 &
+trayer --edge top --align right --widthtype request --height $DZEN_HEIGHT --transparent true --alpha 1 --tint 0x`echo $DZEN_BGCOLOR|tail -c 7` --margin 365 &
 exit
