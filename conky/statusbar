@@ -30,4 +30,4 @@ if_up_strictness address
 override_utf8_locale no
  
 TEXT
-$battery_percent%|${time %H:%M}
+$cpu%|$mem|$battery_percent|${time %F}|${time %H:%M}

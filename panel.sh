@@ -17,7 +17,7 @@ font="Noto Sans S Chinese-medium-16"
 bgcolor=$DZEN_BGCOLOR
 selbg=$COLOR_THEME
 selfg=$DZEN_BGCOLOR
-
+icon_path="/home/"$USER"/.config/herbstluftwm/icon/"
 ####
 # Try to find textwidth binary.
 # In e.g. Ubuntu, this is named dzen2-textwidth.
@@ -102,15 +102,26 @@ hc pad $monitor $panel_height
 			echo -n " ${i:1} "
         done
 		echo -n "^bg()^fg(#FFFFFF)  $windowtitle"
-		battery=`echo $conky | cut -d "|" -f1 ` 
-		date_time=`echo $conky | cut -d "|" -f2 `
-		date_long=`echo "$date_time"|wc -L`
-		min_long=4
-		if [ $date_long = $min_long ] ; then
-			date_time=0$date_time
+		cpu=`echo $conky | cut -d "|" -f1 ` 
+		mem=`echo $conky | cut -d "|" -f2 ` 
+		battery=`echo $conky | cut -d "|" -f3 ` 
+		date=`echo $conky | cut -d "|" -f4 `
+		time=`echo $conky | cut -d "|" -f5 `
+		date_long=`echo "$time"|wc -L`
+		if [ $date_long = 4 ] ; then
+			time=0$time
 		fi
-		echo -n "^bg($bgcolor)^pa($(($panel_width - 105)))                            "
-		echo -n "^bg($bgcolor)^pa($(($panel_width - 105))) ^fg(#FFFFFF)^bg($bgcolor)^pa($(($panel_width - 98)))$battery^pa($(($panel_width - 57))) - $date_time"
+		echo -n "^bg($bgcolor)^pa($(($panel_width - 400)))                                      "
+		cpu_icon="cpu.xbm"
+		echo -n "^pa($(($panel_width - 360)))^i($icon_path$cpu_icon) $cpu"
+		mem_icon="mem.xbm"
+		echo -n "^pa($(($panel_width - 300)))^i($icon_path$mem_icon) $mem"
+		bat_icon="battery"$[battery/10 ]".xbm"
+		echo -n "^pa($(($panel_width - 225)))^i($icon_path$bat_icon) $battery%"
+		cal_icon="calendar.xbm"
+		echo -n "^pa($(($panel_width - 160)))^i($icon_path$cal_icon) $date"
+		clock_icon="clock.xbm"
+		echo -n "^pa($(($panel_width - 50)))^i($icon_path$clock_icon)$time"
 		echo 
 		read line || break
         cmd=( $line )
