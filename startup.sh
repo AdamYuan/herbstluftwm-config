@@ -11,12 +11,3 @@ indicator-keylock &
 pkill volumeicon
 volumeicon 
 
-pkill trayer
-source ~/.config/init/vars
-run=""
-while [ -z "$run" ]; do
-	sleep 0.5
-	run=$(ps -e | grep dzen)
-	echo "$run"
-done
-trayer --edge top --align right --widthtype request --height $DZEN_HEIGHT --transparent true --alpha 1 --tint 0x`echo $DZEN_BGCOLOR|tail -c 7` --margin 100 &

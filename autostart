@@ -201,4 +201,14 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
 done
 feh --bg-center /usr/share/backgrounds/archlinux.png &
 /bin/bash ~/.config/herbstluftwm/startup.sh &
+pkill trayer
+source ~/.config/init/vars
+run=""
+while [ -z "$run" ]; do
+	sleep 0.5
+	run=$(ps -e | grep dzen)
+	echo "$run"
+done
+#sleep 0.5
+trayer --edge top --align right --widthtype request --height $DZEN_HEIGHT --transparent true --alpha 1 --tint 0x`echo $DZEN_BGCOLOR|tail -c 7` --margin 100 &
 exit
