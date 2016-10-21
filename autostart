@@ -9,14 +9,15 @@ export BORDER_WIDTH=1
 export FRAME_GAP=3
 export COLOR_THEME='#00bbff'
 export COLOR_THEME_NORMAL='#000000'
-export TERMINAL='xfce4-terminal'
-export TERMINAL_RUN=$TERMINAL' -x'
+export TERMINAL='xterm'
+export TERMINAL_RUN=$TERMINAL' -e'
 export WEB=google-chrome-unstable
 export FILE=thunar
 
 hc emit_hook reload
 
 xsetroot -solid $DZEN_BGCOLOR
+xrdb -merge ~/.Xresources
 
 # remove all existing keybindings
 hc keyunbind --all
@@ -94,7 +95,7 @@ hc keybind $Mod-Alt-comma  and , move_index -1 , use_index -1 --skip-visible
 
 # layouting
 hc keybind $Mod-r and , remove , spawn bash ~/.config/herbstluftwm/tag.sh
-#hc keybind $Mod-s floating toggle
+hc keybind $Mod-p floating toggle
 hc keybind $Mod-f fullscreen toggle
 #hc keybind $Mod-p pseudotile toggle
 # The following cycles through the available layouts within a frame, but skips
@@ -127,6 +128,7 @@ hc keybind XF86HomePage spawn $WEB
 
 hc keybind $Mod-v spawn gvim
 hc keybind $Mod-s spawn "emacs"
+hc keybind $Mod-n spawn $TERMINAL_RUN nmtui
 hc keybind $Mod-t spawn $FILE
 hc keybind $Mod-w spawn $WEB
 
@@ -156,9 +158,11 @@ hc attr theme.urgent.color $COLOR_THEME
 hc attr theme.inner_width 0
 hc attr theme.inner_color black
 hc attr theme.border_width $BORDER_WIDTH
-hc attr theme.floating.border_width 0
+hc attr theme.floating.border_width $BORDER_WIDTH
 hc attr theme.floating.outer_width 0
 hc attr theme.floating.outer_color black
+hc attr theme.floating.active.color $COLOR_THEME
+hc attr theme.floating.normal.color $COLOR_THEME_NORMAL
 hc attr theme.active.inner_color $COLOR_THEME
 hc attr theme.active.outer_color $COLOR_THEME
 hc attr theme.background_color $COLOR_THEME_NORMAL
@@ -168,6 +172,7 @@ hc set frame_padding $BORDER_WIDTH
 hc set smart_window_surroundings 0
 hc set smart_frame_surroundings 0
 hc set mouse_recenter_gap 0
+hc set focus_follows_mouse 1
 
 # rules
 hc unrule -F
@@ -199,16 +204,15 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     # start it on each monitor
     "$panel" $monitor &
 done
-feh --bg-center /usr/share/backgrounds/archlinux.png &
+feh --bg-max /usr/share/backgrounds/starwars6.jpg &
 /bin/bash ~/.config/herbstluftwm/startup.sh &
 pkill trayer
 source ~/.config/init/vars
 run=""
 while [ -z "$run" ]; do
-	sleep 0.5
+	sleep 1
 	run=$(ps -e | grep dzen)
 	echo "$run"
 done
-#sleep 0.5
-trayer --edge top --align right --widthtype request --height $DZEN_HEIGHT --transparent true --alpha 1 --tint 0x`echo $DZEN_BGCOLOR|tail -c 7` --margin 365 &
+trayer --edge top --align right --widthtype request --height $DZEN_HEIGHT --transparent true --alpha 1 --tint 0x`echo $DZEN_BGCOLOR|tail -c 7` --margin 405 &
 exit

@@ -111,17 +111,17 @@ hc pad $monitor $panel_height
 		if [ $date_long = 4 ] ; then
 			time=0$time
 		fi
-		echo -n "^bg($bgcolor)^pa($(($panel_width - 400)))                                      "
+		echo -n "^bg($bgcolor)^pa($(($panel_width - 400)))                                                                                                                                                                                                                           "
 		cpu_icon="cpu.xbm"
-		echo -n "^pa($(($panel_width - 360)))^i($icon_path$cpu_icon) $cpu"
+		echo -n "^fg(#FFFFFF)^pa($(($panel_width - 400)))^i($icon_path$cpu_icon) ^fg($selbg)$cpu"
 		mem_icon="mem.xbm"
-		echo -n "^pa($(($panel_width - 300)))^i($icon_path$mem_icon) $mem"
+		echo -n "^fg(#FFFFFF)^pa($(($panel_width - 340)))^i($icon_path$mem_icon) ^fg($selbg)$mem"
 		bat_icon="battery"$[battery/10 ]".xbm"
-		echo -n "^pa($(($panel_width - 225)))^i($icon_path$bat_icon) $battery%"
+		echo -n "^fg(#FFFFFF)^pa($(($panel_width - 265)))^i($icon_path$bat_icon) ^fg($selbg)$battery%"
 		cal_icon="calendar.xbm"
-		echo -n "^pa($(($panel_width - 160)))^i($icon_path$cal_icon) $date"
+		echo -n "^fg(#FFFFFF)^pa($(($panel_width - 200)))^i($icon_path$cal_icon) ^fg($selbg)$date"
 		clock_icon="clock.xbm"
-		echo -n "^pa($(($panel_width - 50)))^i($icon_path$clock_icon)$time"
+		echo -n "^fg(#FFFFFF)^pa($(($panel_width - 55)))^i($icon_path$clock_icon) ^fg($selbg)$time"
 		echo 
 		read line || break
         cmd=( $line )
