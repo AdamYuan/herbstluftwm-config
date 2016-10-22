@@ -30,7 +30,8 @@ Mod=Mod4    # Use alt as the main modifier
 hc keybind $Mod-Shift-q quit
 hc keybind $Mod-Shift-r reload
 hc keybind $Mod-x close
-hc keybind $Mod-e spawn dmenu_run -h $DZEN_HEIGHT -fn "Noto Sans S Chinese-12" -nb $DZEN_BGCOLOR -nf '#ffffff' -sb $COLOR_THEME -sf black 
+hc keybind $Mod-e spawn rofi -show run #dmenu_run -h $DZEN_HEIGHT -fn "Noto Sans S Chinese-12" -nb $DZEN_BGCOLOR -nf '#ffffff' -sb $COLOR_THEME -sf black 
+hc keybind $Mod-q spawn rofi -show window
 hc keybind $Mod-Return spawn $TERMINAL_RUN fish # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-Shift-l spawn slimlock
 
@@ -118,8 +119,8 @@ hc mousebind $Mod-Button3 resize
 #hc keybind XF86AudioMute spawn amixer set Master toggle
 
 # Backlight
-hc keybind XF86MonBrightnessUp spawn xbacklight + 5 -time 0 -steps 5
-hc keybind XF86MonBrightnessDown spawn xbacklight - 5 -time 0 -steps 5
+hc keybind XF86MonBrightnessUp spawn xbacklight + 1 -time 0 -steps 1
+hc keybind XF86MonBrightnessDown spawn xbacklight - 1 -time 0 -steps 1
 
 hc keybind Print spawn scrot
 hc keybind XF86MyComputer spawn $FILE
@@ -128,7 +129,7 @@ hc keybind XF86HomePage spawn $WEB
 
 hc keybind $Mod-v spawn gvim
 hc keybind $Mod-s spawn "emacs"
-hc keybind $Mod-n spawn $TERMINAL_RUN nmtui
+hc keybind $Mod-n spawn nmcli_dmenu
 hc keybind $Mod-t spawn $FILE
 hc keybind $Mod-w spawn $WEB
 
@@ -172,7 +173,7 @@ hc set frame_padding $BORDER_WIDTH
 hc set smart_window_surroundings 0
 hc set smart_frame_surroundings 0
 hc set mouse_recenter_gap 0
-hc set focus_follows_mouse 1
+hc set focus_follows_mouse 0
 
 # rules
 hc unrule -F
